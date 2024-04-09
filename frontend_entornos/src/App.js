@@ -1,8 +1,9 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Timer from './Timer';
 import QuoteDisplay from './QuoteDisplay';
 import QuoteInput from './QuoteInput';
-
+import './App.css';
 const App = () => {
   return (
     <div>
