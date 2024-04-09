@@ -1,0 +1,16 @@
+/* Timer.css */
+.timer {
+    position: absolute;
+    top: 2rem;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: aquamarine;
+}
