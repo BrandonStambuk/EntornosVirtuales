@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use app\Models\Ejercicio;
 
 class EjercicioController extends Controller
 {
@@ -25,7 +26,10 @@ class EjercicioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ejercicio=new Ejercicio();
+        $ejercicio->nombre = $request->nombre;
+        $ejercicio->tipo = $request->tipo;
+        $ejercicio->codigo = $request->codigo;
     }
 
     /**
