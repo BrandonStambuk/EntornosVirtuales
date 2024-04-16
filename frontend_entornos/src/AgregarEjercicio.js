@@ -3,7 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import axios from 'axios'
 import { URL_API } from "./const";
 
-const endpoint = 'http://localhost:8000/api';
+const endpoint = URL_API;
 
 const AgregarEjercicio = () => {
     const [nombre, setnombre] = useState("");

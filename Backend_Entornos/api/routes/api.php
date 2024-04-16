@@ -18,6 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::controller(EjercicioController::class)->group(function (){    
+Route::controller(EjercicioController::class)->group(function (){
+    Route::get('/ejercicios', 'index');    
     Route::post('/crearEjercicio', 'store');
   });

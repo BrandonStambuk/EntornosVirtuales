@@ -15,7 +15,8 @@ class EjercicioController extends Controller
      */
     public function index()
     {
-        //
+        $ejercicios = Ejercicio::all();
+        return $ejercicios;
     }
 
     /**
