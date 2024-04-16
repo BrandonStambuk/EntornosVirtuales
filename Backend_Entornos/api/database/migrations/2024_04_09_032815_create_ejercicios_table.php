@@ -17,7 +17,7 @@ class CreateEjerciciosTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('tipo');
-            $table->string('codigo');
+            $table->text('codigo');
             $table->timestamps();
         });
     }

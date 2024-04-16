@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Ejercicio extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre', 'tipo', 'codigo'];
+protected $fillable = ['nombre', 'tipo' ,'codigo'];
 }

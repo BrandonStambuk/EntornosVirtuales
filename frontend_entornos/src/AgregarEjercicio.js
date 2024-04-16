@@ -3,25 +3,30 @@ import { Editor } from "@tinymce/tinymce-react";
 import axios from 'axios'
 import { URL_API } from "./const";
 
-const endpoint = URL_API;
+const endpoint = 'http://localhost:8000/api';
 
 const AgregarEjercicio = () => {
-    const [descripcion, setDescripcion] = useState("");
     const [nombre, setnombre] = useState("");
+    const [tipo, setTipo] = useState("");    
+    const [codigo, setCodigo] = useState("");
 
     
     const handleNombreChange = (nombre) => {
-        setnombre(nombre.value);
+        setnombre(nombre.target.value);
     }
-    const handleDescripcionChange = (descripcion) => {
-        setDescripcion(descripcion);
+    const handleTipoChange = (tipo) => {
+        setTipo(tipo.target.value);
+    }
+    const handleCodigoChange = (codigo) => {
+        setCodigo(codigo);
     }
 
     const handleStoreEjercicio = async (e) => {
         e.preventDefault();
-        const responseEvento = await axios.post(`${endpoint}/crearEventoDinamico`, {
-            descripcion: descripcion,
-            nombre: nombre
+        await axios.post(`${endpoint}/crearEjercicio`, {
+            nombre: nombre,
+            tipo: tipo,
+            codigo: codigo          
         });
     }
 
@@ -39,13 +44,22 @@ const AgregarEjercicio = () => {
                     className='form-control'
                 />
                 </div>
+                <div className='mb-3'>
+                <label className='form-label'>Tipo de Codigo</label>
+                <input 
+                    value={tipo} 
+                    onChange={ handleTipoChange}
+                    type='text'
+                    className='form-control'
+                />
+                </div>
                 <div className="form-group">
-                    <label htmlFor="descripcion">Descripción</label>
+                    <label htmlFor="descripcion">Codigo</label>
                     <Editor
                         apiKey="et3kv22txmedmy751hwdgrmywr1k93evr5t5in9vmjh0mze8"
                         id="descripcion"
                         name="descripcion"
-                        value={descripcion}
+                        value={codigo}
                         init={{
                         directionality: 'ltr',
                         setup: function (editor) {
@@ -53,7 +67,7 @@ const AgregarEjercicio = () => {
                             });
                         },
                         }}
-                        onEditorChange={handleDescripcionChange}
+                        onEditorChange={handleCodigoChange}
                     />
                 </div>                
                 <button onClick={handleStoreEjercicio} className='btn btn-success'>Agregar</button>
