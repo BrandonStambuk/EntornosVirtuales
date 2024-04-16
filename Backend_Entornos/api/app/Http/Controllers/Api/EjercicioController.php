@@ -42,7 +42,8 @@ class EjercicioController extends Controller
      */
     public function show($id)
     {
-        //
+        $ejercicio = Ejercicio::find($id);
+        return $ejercicio;
     }
 
     /**

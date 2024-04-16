@@ -5,9 +5,10 @@ import QuoteDisplay from './QuoteDisplay';
 import QuoteInput from './QuoteInput';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AgregarEjercicio from './AgregarEjercicio';
-import MostrarEjercicios from './MostrarEjercicios';
 
+import MostrarEjercicios from './MostrarEjercicios';
+import AgregarEjercicio from './AgregarEjercicio';
+import HacerEjercicios from './HacerEjercicio';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <Routes>
         <Route path='/agregar' element={ <AgregarEjercicio/>} />
         <Route path='/mostrar' element={ <MostrarEjercicios/>} />
+        <Route path='/mostrar/:id' element={ <HacerEjercicios/>} />
       </Routes>      
       </BrowserRouter>
     </div>
