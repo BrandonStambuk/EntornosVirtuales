@@ -19,6 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::controller(EjercicioController::class)->group(function (){
+    Route::get('/ejercicios/{id}', 'show');
     Route::get('/ejercicios', 'index');    
     Route::post('/crearEjercicio', 'store');
+    Route::get('/ejercicio-aleatorio','indexRandom');
   });

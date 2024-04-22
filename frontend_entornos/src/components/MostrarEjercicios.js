@@ -18,7 +18,6 @@ const MostrarEjercicios = () => {
     return (
         <div>
         <div className='d-grid gap-2 col-md-6'>
-            <Link to="/agregar" className='btn btn-success btn-lg mt-2 mb-2 text-white'>Agregar Ejercicio</Link>
         </div>
         <table className='table table-striped'>
             <thead className='bg-primary text-white'>
@@ -34,8 +33,7 @@ const MostrarEjercicios = () => {
                         <td>{ejercicio.nombre}</td>
                         <td>{ejercicio.tipo}</td>
                         <td>
-                            <button className='btn btn-info'>Editar</button>
-                            <button className='btn btn-danger'>Delete</button>
+                        <Link to={`/mostrar/${ejercicio.id}`} className='btn btn-info'>hacer</Link>
                         </td>
                     </tr>
                 ))}                

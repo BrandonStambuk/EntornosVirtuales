@@ -19,6 +19,11 @@ class EjercicioController extends Controller
         return $ejercicios;
     }
 
+    public function indexRandom(){
+        $ejercicioRandom = Ejercicio::inRandomOrder()->value('id');
+        return $ejercicioRandom;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -42,7 +47,8 @@ class EjercicioController extends Controller
      */
     public function show($id)
     {
-        //
+        $ejercicio = Ejercicio::find($id);
+        return $ejercicio;
     }
 
     /**
