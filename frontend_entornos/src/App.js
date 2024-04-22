@@ -2,12 +2,12 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 //import Navbar from './Navbar';
-import MostrarEjercicios from './components/MostrarEjercicios';
-import AgregarEjercicio from './components/AgregarEjercicio';
-import Homepage from './components/HomePage';
-import HacerEjercicios from './components/HacerEjercicio';
-import Navbar from './components/Navbar';
-import Ejercicio from './components/Ejercicio';
+import MostrarEjercicios from './Components/MostrarEjercicios';
+import AgregarEjercicio from './Components/AgregarEjercicio';
+import Homepage from './Components/HomePage';
+import HacerEjercicios from './Components/HacerEjercicio';
+import Navbar from './Components/Navbar';
+import Ejercicio from './Components/Ejercicio';
 //import'./css/App.css';
 const App = () => {
   return (

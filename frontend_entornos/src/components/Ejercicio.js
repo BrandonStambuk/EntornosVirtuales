@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Timer from './Timer';
-import QuoteDisplay from '../components/QuoteDisplay';
-import QuoteInput from '../components/QuoteInput';
+import QuoteDisplay from '../Components/QuoteDisplay';
+import QuoteInput from '../Components/QuoteInput';
 import axios from 'axios';
 import { URL_API } from './const';
 import '../css/App.css';
