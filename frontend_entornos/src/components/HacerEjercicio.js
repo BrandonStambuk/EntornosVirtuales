@@ -21,6 +21,9 @@ const HacerEjercicios = () => {
         setNombre(response.data.nombre)
         setCodigo(response.data.codigo)
     }
+    const handleComenzar = () => {
+        
+    }
 
     return (
         <div>
@@ -33,10 +36,12 @@ const HacerEjercicios = () => {
                   
                 </p>
                 <div className="event-description" style={{ textAlign: 'left' }} dangerouslySetInnerHTML={{ __html: codigo }} />
-        </div>
+            </div>
+            <div>
+                <button className="btn btn-primary" onClick={handleComenzar}>Comenzar</button>
+            </div>
 
         </div>
-        
         
     )
 }
