@@ -1,22 +1,26 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import Timer from './Timer';
-import QuoteDisplay from './QuoteDisplay';
-import QuoteInput from './QuoteInput';
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AgregarEjercicio from './AgregarEjercicio';
-import Homepage from './HomePage';
-import Ejercicio from './Ejercicio';
+//import Navbar from './Navbar';
+import MostrarEjercicios from './components/MostrarEjercicios';
+import AgregarEjercicio from './components/AgregarEjercicio';
+import Homepage from './components/HomePage';
+import HacerEjercicios from './components/HacerEjercicio';
+import Navbar from './components/Navbar';
+import Ejercicio from './components/Ejercicio';
+//import'./css/App.css';
 const App = () => {
   return (
     <div>
       <BrowserRouter>
-      <Routes>
-        <Route path='/agregar' element={ <AgregarEjercicio/>} />
-        <Route path='/' element={ <Homepage/>} />
-        <Route path='/ejercicio' element={ <Ejercicio/>} />
-      </Routes>      
+       <Navbar></Navbar>
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route path='/agregar' element={<AgregarEjercicio />} />
+          <Route path='/mostrar' element={<MostrarEjercicios />} />
+          <Route path='/mostrar/:id' element={<HacerEjercicios />} />
+          <Route path='/ejercicio' element={<Ejercicio/>} />
+        </Routes>      
       </BrowserRouter>
     </div>
   );

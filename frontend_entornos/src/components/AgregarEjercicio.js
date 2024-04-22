@@ -63,11 +63,27 @@ const AgregarEjercicio = () => {
                         init={{
                         directionality: 'ltr',
                         setup: function (editor) {
-                            editor.on('init', function () {                            
+                            editor.on('init', function () {
+                                editor.on('keydown', function (e) {
+                                    if (e.keyCode === 9) {
+                                        e.preventDefault();
+                                        
+                                        const selection = editor.selection.getRng();
+                                        const startOffset = selection.startOffset;
+                                        const endOffset = selection.endOffset;
+                                        if (startOffset !== endOffset) {
+                                            const selectedText = editor.selection.getContent();
+                                            const indentedText = selectedText.replace(/^/gm, '\t');
+                                            editor.selection.setContent(indentedText);
+                                        } else {
+                                            editor.insertContent('\t');
+                                        }
+                                    }
+                                });
                             });
                         },
-                        }}
-                        onEditorChange={handleCodigoChange}
+                    }}
+                    onEditorChange={handleCodigoChange}
                     />
                 </div>                
                 <button onClick={handleStoreEjercicio} className='btn btn-success'>Agregar</button>
