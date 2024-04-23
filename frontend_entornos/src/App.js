@@ -8,6 +8,7 @@ import Homepage from './components/HomePage';
 import HacerEjercicios from './components/HacerEjercicio';
 import Navbar from './components/Navbar';
 import Ejercicio from './components/Ejercicio';
+import AgregarEjercicio2 from './components/AgregarEjercicio2';
 //import'./css/App.css';
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/agregar' element={<AgregarEjercicio />} />
+          <Route path='/agregar2' element={<AgregarEjercicio2 />} />
           <Route path='/mostrar' element={<MostrarEjercicios />} />
           <Route path='/mostrar/:id' element={<HacerEjercicios />} />
           <Route path='/ejercicio' element={<Ejercicio/>} />

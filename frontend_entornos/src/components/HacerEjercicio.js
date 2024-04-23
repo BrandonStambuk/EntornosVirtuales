@@ -52,7 +52,10 @@ const HacerEjercicio = () => {
       code.startsWith("Key") ||
       code.startsWith("Digit") ||
       code === "Backspace" ||
-      code === "Space"
+      code === "Space"||
+      code === "Enter"||
+      code === "Tab"||
+      /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(code)
     );
   };
 
@@ -117,10 +120,15 @@ const HacerEjercicio = () => {
     setCodigo(response.data.codigo);
 
     const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = response.data.codigo;
-    const plainText = tempDiv.innerText;
+  tempDiv.innerHTML = response.data.codigo;
+  
+  tempDiv.querySelectorAll('*').forEach(node => node.removeAttribute('style'));
+  tempDiv.querySelectorAll('*').forEach(node => node.removeAttribute('class'));
 
-    setCodigo2(plainText);
+  
+  const plainText = tempDiv.innerText.replace(/\n/g, "enter").replace(/\t/g, "tab");
+
+  setCodigo2(plainText);
   };
 
   const handleComenzar = () => {
@@ -145,14 +153,13 @@ const HacerEjercicio = () => {
                 <p className="event-info-text left">
                   <strong>Codigo:</strong>
                 </p>
-                <div className="relative leading-relaxed break-all">          
-                  <div dangerouslySetInnerHTML={{ __html: codigo }} />
-                  <div className="absolute inset-0 d-flex align-items-center justify-content-center">
-                    <UserTypings userInput={typed} words={codigo2} />
+                <div className="relative leading-relaxed break-all" style={{ position: 'relative' }}>
+                  <div dangerouslySetInnerHTML={{ __html: codigo }} style={{ zIndex: 1 }} />
+                  <div className="absolute inset-0" style={{ zIndex: 2 }}>
+                      <UserTypings userInput={typed} words={codigo2} />
                   </div>
-                </div>
               </div>
-              
+              </div>              
             </div>
           </div>
         </div>
