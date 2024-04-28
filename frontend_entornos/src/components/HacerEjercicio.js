@@ -52,9 +52,9 @@ const HacerEjercicio = () => {
       code.startsWith("Key") ||
       code.startsWith("Digit") ||
       code === "Backspace" ||
-      code === "Space"||
-      code === "Enter"||
-      code === "Tab"||
+      code === "Space" ||
+      code === "Enter" ||
+      code === "Tab" ||
       /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(code)
     );
   };
@@ -120,15 +120,15 @@ const HacerEjercicio = () => {
     setCodigo(response.data.codigo);
 
     const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = response.data.codigo;
-  
-  tempDiv.querySelectorAll('*').forEach(node => node.removeAttribute('style'));
-  tempDiv.querySelectorAll('*').forEach(node => node.removeAttribute('class'));
+    tempDiv.innerHTML = response.data.codigo;
 
-  
-  const plainText = tempDiv.innerText.replace(/\n/g, "enter").replace(/\t/g, "tab");
+    tempDiv.querySelectorAll('*').forEach(node => node.removeAttribute('style'));
+    tempDiv.querySelectorAll('*').forEach(node => node.removeAttribute('class'));
 
-  setCodigo2(plainText);
+
+    const plainText = tempDiv.innerText.replace(/\n/g, "enter").replace(/\t/g, "tab");
+
+    setCodigo2(plainText);
   };
 
   const handleComenzar = () => {
@@ -140,26 +140,28 @@ const HacerEjercicio = () => {
   return (
     <div className="container mt-5">
       <div className="text-center mt-4">
-            <button className="btn btn-primary" onClick={handleComenzar}>Comenzar</button>
+        <button className="btn btn-primary" onClick={handleComenzar}>Comenzar</button>
       </div>
       <h1 className="text-center">{nombre}</h1>
       <h2 className="text-center">{tipo}</h2>
       <div className="row justify-content-center mt-4">
         <div className="col-md-8">
-          
+
           <div className="card">
             <div className="card-body">
               <div className="event-info-container">
                 <p className="event-info-text left">
                   <strong>Codigo:</strong>
                 </p>
-                <div className="relative leading-relaxed break-all" style={{ position: 'relative' }}>
-                  <div dangerouslySetInnerHTML={{ __html: codigo }} style={{ zIndex: 1 }} />
-                  <div className="absolute inset-0" style={{ zIndex: 2 }}>
+                <div>
+                  <div style={{ position: 'relative' }}>
+                    <div dangerouslySetInnerHTML={{ __html: codigo }} />
+                    <div style={{ position: 'absolute', top: 0, left: 0 }}>
                       <UserTypings userInput={typed} words={codigo2} />
+                    </div>
                   </div>
+                </div>
               </div>
-              </div>              
             </div>
           </div>
         </div>
