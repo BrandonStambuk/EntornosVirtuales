@@ -4,11 +4,16 @@ import { URL_API } from './const';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const endpoint = URL_API;
+let mistake=false;
 
 const Character = ({ actual, expected }) => {
   const isCorrect = actual === expected;
   const isWhiteSpace = expected === " ";
-
+  if (isCorrect){
+    mistake=false;
+  }else{
+    mistake=true;
+  }
   const textStyle = {
     color: isCorrect && !isWhiteSpace ? '#3B82F6' : '#EF4444',
     backgroundColor: !isCorrect && isWhiteSpace ? 'rgba(239, 68, 68, 0.1)' : 'transparent',
@@ -48,15 +53,11 @@ const HacerEjercicio = () => {
   const { id } = useParams();
 
   const isKeyboardCodeAllowed = (code) => {
-    return (
-      code.startsWith("Key") ||
-      code.startsWith("Digit") ||
-      code === "Backspace" ||
-      code === "Space" ||
-      code === "Enter" ||
-      code === "Tab" ||
-      /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(code)
-    );
+    if (code==="Shift" || code==="CapsLock" || code==="Control" || code==="Alt" ){
+    return true;
+    }
+    return false;
+    
   };
 
   const countErrors = (actual, expected) => {
@@ -86,7 +87,17 @@ const HacerEjercicio = () => {
 
   useEffect(() => {
     const keydownHandler = ({ key, code }) => {
-      if (!isKeyboardCodeAllowed(code)) {
+      if (isKeyboardCodeAllowed(key)) {
+        return;
+      }
+      if (mistake && key === "Backspace") {
+        setTyped((prev) => prev.slice(0, -1));
+        setCursor((cursor) => cursor - 1);
+        totalTyped.current -= 1;
+        return; 
+      }
+
+      if(mistake){
         return;
       }
 
@@ -107,7 +118,7 @@ const HacerEjercicio = () => {
     return () => {
       window.removeEventListener("keydown", keydownHandler);
     };
-  }, []);
+  }, [mistake]);
 
   useEffect(() => {
     getEjercicio();
@@ -126,7 +137,7 @@ const HacerEjercicio = () => {
     tempDiv.querySelectorAll('*').forEach(node => node.removeAttribute('class'));
 
 
-    const plainText = tempDiv.innerText.replace(/\n/g, "enter").replace(/\t/g, "tab");
+    const plainText = tempDiv.innerText;
 
     setCodigo2(plainText);
   };
@@ -155,8 +166,8 @@ const HacerEjercicio = () => {
                 </p>
                 <div>
                   <div style={{ position: 'relative' }}>
-                    <div dangerouslySetInnerHTML={{ __html: codigo }} />
-                    <div style={{ position: 'absolute', top: 0, left: 0 }}>
+                    <div dangerouslySetInnerHTML={{ __html: codigo }} className="text-monospace fs-4"/>
+                    <div style={{ position: 'absolute', top: 0, left: 0 }} className="text-monospace fs-4">
                       <UserTypings userInput={typed} words={codigo2} />
                     </div>
                   </div>
