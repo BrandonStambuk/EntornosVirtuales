@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const endpoint = URL_API;
 let mistake=false;
+let totalmistakes=0;
 
 const Character = ({ actual, expected }) => {
   const isCorrect = actual === expected;
@@ -60,18 +61,6 @@ const HacerEjercicio = () => {
     
   };
 
-  const countErrors = (actual, expected) => {
-    const expectedCharacters = expected.split("");
-
-    return expectedCharacters.reduce((errors, expectedChar, i) => {
-      const actualChar = actual[i];
-      if (actualChar !== expectedChar) {
-        errors++;
-      }
-      return errors;
-    }, 0);
-  };
-
   const calculateAccuracyPercentage = (errors, total) => {
     if (total > 0) {
       const corrects = total - errors;
@@ -89,15 +78,16 @@ const HacerEjercicio = () => {
     const keydownHandler = ({ key, code }) => {
       if (isKeyboardCodeAllowed(key)) {
         return;
-      }
+      }      
       if (mistake && key === "Backspace") {
         setTyped((prev) => prev.slice(0, -1));
         setCursor((cursor) => cursor - 1);
         totalTyped.current -= 1;
+        totalmistakes+=1;        
         return; 
       }
 
-      if(mistake){
+      if(mistake){        
         return;
       }
 
@@ -118,7 +108,7 @@ const HacerEjercicio = () => {
     return () => {
       window.removeEventListener("keydown", keydownHandler);
     };
-  }, [mistake]);
+  }, [mistake,totalmistakes]);
 
   useEffect(() => {
     getEjercicio();
@@ -172,6 +162,7 @@ const HacerEjercicio = () => {
                     </div>
                   </div>
                 </div>
+                <div className="text-danger mt-3">Errores: {totalmistakes}</div>
               </div>
             </div>
           </div>
