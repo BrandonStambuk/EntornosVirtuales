@@ -51,6 +51,7 @@ const HacerEjercicio = () => {
   const [typed, setTyped] = useState("");
   const [cursor, setCursor] = useState(0);
   const totalTyped = useRef(0);
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const isKeyboardCodeAllowed = (code) => {
@@ -59,19 +60,6 @@ const HacerEjercicio = () => {
     }
     return false;
     
-  };
-
-  const calculateAccuracyPercentage = (errors, total) => {
-    if (total > 0) {
-      const corrects = total - errors;
-      return (corrects / total) * 100;
-    }
-
-    return 0;
-  };
-
-  const formatPercentage = (percentage) => {
-    return percentage.toFixed(0) + "%";
   };
 
   useEffect(() => {
@@ -111,6 +99,16 @@ const HacerEjercicio = () => {
   }, [mistake,totalmistakes]);
 
   useEffect(() => {
+    if (typed.length > 0 && typed.length === codigo2.length) {
+      const navigateToMostrar = async () => {
+        await navigate('/mostrar');
+        console.log("Ejercicio completado");
+      };
+      navigateToMostrar();
+    }
+  }, [typed, codigo2, navigate]);
+
+  useEffect(() => {
     getEjercicio();
   }, []);
 
@@ -132,16 +130,9 @@ const HacerEjercicio = () => {
     setCodigo2(plainText);
   };
 
-  const handleComenzar = () => {
-    totalTyped.current = 0;
-    setTyped("");
-    setCursor(0);
-  };
-
   return (
     <div className="container mt-5">
       <div className="text-center mt-4">
-        <button className="btn btn-primary" onClick={handleComenzar}>Comenzar</button>
       </div>
       <h1 className="text-center">{nombre}</h1>
       <h2 className="text-center">{tipo}</h2>
