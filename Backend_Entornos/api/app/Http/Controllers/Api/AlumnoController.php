@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Alumno;
 
 class AlumnoController extends Controller
 {
@@ -25,7 +26,13 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $alumno=new Alumno();
+        $alumno->nombre = $request->nombre;
+        $alumno->apellido = $request->apellido;
+        $alumno->email = $request->email;
+        $alumno->password = $request->password;
+        $alumno->stats = $request->stats;
+        $alumno->save();
     }
 
     /**

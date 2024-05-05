@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from 'axios'
-import { URL_API } from "./const";
+import { URL_API } from './const';
 
 const endpoint = URL_API;
 

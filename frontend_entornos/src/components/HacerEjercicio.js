@@ -50,6 +50,7 @@ const HacerEjercicio = () => {
   const [codigo2, setCodigo2] = useState('');
   const [typed, setTyped] = useState('');
   const [cursor, setCursor] = useState(0);
+  const [keyEvents, setKeyEvents] = useState([]);
   const [mistakes, setMistakes]=useState(0);  
   const [startTimer, setStartTimer] = useState(false);
   const totalTyped = useRef(0);
@@ -71,6 +72,12 @@ const HacerEjercicio = () => {
       if (!startTimer) {
         setStartTimer(true);
       }
+      const event = {
+        key,
+        time: new Date().getTime(), 
+      };
+    
+      setKeyEvents((prevEvents) => [...prevEvents, event]);
 
       if (mistake && key === 'Backspace') {
         setTyped((prev) => prev.slice(0, -1));

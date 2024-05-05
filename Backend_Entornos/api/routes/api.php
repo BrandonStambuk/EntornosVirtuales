@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\EjercicioController;
+use App\Http\Controllers\Api\AlumnoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,4 +24,9 @@ Route::controller(EjercicioController::class)->group(function (){
     Route::get('/ejercicios', 'index');    
     Route::post('/crearEjercicio', 'store');
     Route::get('/ejercicio-aleatorio','indexRandom');
+  });
+
+  Route::controller(AlumnoController::class)->group(function (){  
+    Route::post('/registrarAlumno', 'store');
+
   });

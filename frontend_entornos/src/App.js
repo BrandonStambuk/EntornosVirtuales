@@ -9,6 +9,7 @@ import HacerEjercicios from './components/HacerEjercicio';
 import Navbar from './components/Navbar';
 import Ejercicio from './components/Ejercicio';
 import AgregarEjercicio2 from './components/AgregarEjercicio2';
+import RegistrarAlumno from './components/RegistroAlumno';
 //import'./css/App.css';
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='/mostrar' element={<MostrarEjercicios />} />
           <Route path='/mostrar/:id' element={<HacerEjercicios />} />
           <Route path='/ejercicio' element={<Ejercicio/>} />
+          <Route path='registrar-alumno'element={<RegistrarAlumno/>}/>
         </Routes>      
       </BrowserRouter>
     </div>
