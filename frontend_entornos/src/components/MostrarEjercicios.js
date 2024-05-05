@@ -23,7 +23,7 @@ const MostrarEjercicios = () => {
             <thead className='bg-primary text-white'>
                 <tr>
                     <th>nombre</th>
-                    <th>tipo de lenguaje</th>
+                    <th>Tipo de lenguaje</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
