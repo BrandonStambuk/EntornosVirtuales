@@ -46,6 +46,24 @@ class AlumnoController extends Controller
         //
     }
 
+    public function find(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        $alumno = Alumno::where('email', $request->email)
+                        ->where('password', $request->password)
+                        ->first();
+    
+        if ($alumno) {
+            return response()->json(['id' => $alumno->id]);
+        } else {
+            return response()->json(['error' => 'Credenciales incorrectas'], 401);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
