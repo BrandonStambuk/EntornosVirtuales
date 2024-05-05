@@ -50,7 +50,8 @@ const HacerEjercicio = () => {
   const [codigo2, setCodigo2] = useState('');
   const [typed, setTyped] = useState('');
   const [cursor, setCursor] = useState(0);
-  const [startTimer, setStartTimer] = useState(false); // Estado para controlar el inicio del cronómetro
+  const [mistakes, setMistakes]=useState(0);  
+  const [startTimer, setStartTimer] = useState(false);
   const totalTyped = useRef(0);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -67,8 +68,6 @@ const HacerEjercicio = () => {
       if (isKeyboardCodeAllowed(key)) {
         return;
       }
-
-      // Iniciar el cronómetro cuando se presiona la primera tecla
       if (!startTimer) {
         setStartTimer(true);
       }
@@ -78,6 +77,7 @@ const HacerEjercicio = () => {
         setCursor((cursor) => cursor - 1);
         totalTyped.current -= 1;
         totalMistakes += 1;
+        setMistakes(totalMistakes);
         return;
       }
 
@@ -155,7 +155,7 @@ const HacerEjercicio = () => {
                     </div>
                   </div>
                 </div>
-                <div className="text-danger mt-3">Errores: {totalMistakes}</div>
+                <div className="text-danger mt-3">Errores: {mistakes}</div>
               </div>
             </div>
           </div>
