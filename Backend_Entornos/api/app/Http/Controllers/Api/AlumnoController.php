@@ -73,7 +73,15 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+    }
+
+    public function updateStats(Request $request, $id)
+    {
+        $alumno = Alumno::findOrFail($request->id);
+        $alumno->stats = $request->stats;
+        $alumno->save();
+        return $alumno;
     }
 
     /**

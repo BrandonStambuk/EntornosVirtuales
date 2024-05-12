@@ -23,7 +23,7 @@ const InicioSesion = () => {
                 email: email,
                 password: password
             });
-
+            localStorage.setItem("alumnoData", JSON.stringify(response.data));
             console.log("Respuesta del servidor:", response.data);
         } catch (error) {
             console.error("Error al buscar alumno:", error);

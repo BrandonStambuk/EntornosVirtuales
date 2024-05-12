@@ -113,17 +113,35 @@ const HacerEjercicio = () => {
 
   useEffect(() => {
     if (typed.length > 0 && typed.length === codigo2.length) {
-      const navigateToMostrar = async () => {
-        await navigate('/mostrar');
-        console.log('Ejercicio completado');
-      };
-      navigateToMostrar();
+      const stats = keyEvents.map(event => ({
+        key: event.key,
+        time: event.time
+      }));
+
+      const alumnoId = localStorage.getItem('alumnoData');
+      console.log("alumnoData:", alumnoId);
+      if (alumnoId) {
+        updateAlumnoStats(alumnoId, stats);
+      }
     }
-  }, [typed, codigo2, navigate]);
+  }, [typed, codigo2, keyEvents]);
 
   useEffect(() => {
     getEjercicio();
   }, []);
+
+  const updateAlumnoStats = async (alumnoId, stats) => {
+    try {
+      const alumnoData = JSON.parse(alumnoId); // Convertir la cadena JSON a un objeto JavaScript
+      const { id } = alumnoData; // Extraer el ID del objeto alumnoData
+      await axios.put(`${endpoint}/alumnosStats/${id}`, {
+      stats: JSON.stringify(stats)
+      });
+      navigate('/mostrar');
+    } catch (error) {
+      console.error("Error al actualizar stats del alumno:", error);
+    }
+  };
 
   const getEjercicio = async () => {
     const response = await axios.get(`${endpoint}/ejercicios/${id}`);

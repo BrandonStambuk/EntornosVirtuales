@@ -29,5 +29,6 @@ Route::controller(EjercicioController::class)->group(function (){
   Route::controller(AlumnoController::class)->group(function (){  
     Route::post('/registrarAlumno', 'store');
     Route::post('/alumnos/find', 'find');
+    Route::put('/alumnosStats/{id}', 'updateStats');
 
   });
