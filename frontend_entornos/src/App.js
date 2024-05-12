@@ -11,6 +11,7 @@ import Ejercicio from './components/Ejercicio';
 import AgregarEjercicio2 from './components/AgregarEjercicio2';
 import RegistrarAlumno from './components/RegistroAlumno';
 import InicioSesion from './components/InicioSesion';
+import AlumnoStats from './components/AlumnoStats';
 //import'./css/App.css';
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route path='/ejercicio' element={<Ejercicio/>} />
           <Route path='/registrar-alumno'element={<RegistrarAlumno/>}/>
           <Route path='/inicio-sesion' element={<InicioSesion/>}/>
+          <Route path='/stats' element={<AlumnoStats/>}/>
         </Routes>      
       </BrowserRouter>
     </div>

@@ -71,13 +71,7 @@ const HacerEjercicio = () => {
       }
       if (!startTimer) {
         setStartTimer(true);
-      }
-      const event = {
-        key,
-        time: new Date().getTime(), 
-      };
-    
-      setKeyEvents((prevEvents) => [...prevEvents, event]);
+      }      
 
       if (mistake && key === 'Backspace') {
         setTyped((prev) => prev.slice(0, -1));
@@ -85,12 +79,19 @@ const HacerEjercicio = () => {
         totalTyped.current -= 1;
         totalMistakes += 1;
         setMistakes(totalMistakes);
+        setKeyEvents((prevEvents) => prevEvents.slice(0, -1));
         return;
       }
 
       if (mistake) {
         return;
       }
+      const event = {
+        key,
+        time: new Date().getTime(), 
+      };
+    
+      setKeyEvents((prevEvents) => [...prevEvents, event]);
 
       switch (key) {
         case 'Backspace':
@@ -132,8 +133,8 @@ const HacerEjercicio = () => {
 
   const updateAlumnoStats = async (alumnoId, stats) => {
     try {
-      const alumnoData = JSON.parse(alumnoId); // Convertir la cadena JSON a un objeto JavaScript
-      const { id } = alumnoData; // Extraer el ID del objeto alumnoData
+      const alumnoData = JSON.parse(alumnoId);
+      const { id } = alumnoData;
       await axios.put(`${endpoint}/alumnosStats/${id}`, {
       stats: JSON.stringify(stats)
       });

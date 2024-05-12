@@ -43,7 +43,8 @@ class AlumnoController extends Controller
      */
     public function show($id)
     {
-        //
+        $alumno = Alumno::find($id);
+        return $alumno;
     }
 
     public function find(Request $request)
