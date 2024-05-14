@@ -48,7 +48,7 @@ const AlumnoStats = () => {
       data: {
         labels: labels,
         datasets: [{
-          label: 'Diferencia de tiempo por tecla',
+          label: 'valor promedio en ms',
           data: values,
           backgroundColor: 'rgba(54, 162, 235, 0.2)',
           borderColor: 'rgba(54, 162, 235, 1)',
