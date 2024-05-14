@@ -39,28 +39,17 @@ const AlumnoStats = () => {
       console.error('Los datos de estadísticas no son un arreglo válido:', statsData);
       return;
     }
-  
-    // Obtener los labels y los valores originales
+    statsArray.sort((a, b) => b.average - a.average);
     let labels = statsArray.map(entry => entry.key);
-    let values = statsArray.map(entry => entry.time);
+    let values = statsArray.map(entry => entry.average);
   
-    // Eliminar el primer valor del arreglo de labels
-    labels = labels.slice(1);
-  
-    // Calcular la diferencia entre los valores en values
-    const differences = [];
-    for (let i = 1; i < values.length; i++) {
-      differences.push(values[i] - values[i-1]);
-    }
-  
-    // Crear el nuevo gráfico con los datos actualizados
     setMyChart(new Chart(ctx, {
       type: 'bar',
       data: {
         labels: labels,
         datasets: [{
           label: 'Diferencia de tiempo por tecla',
-          data: differences,
+          data: values,
           backgroundColor: 'rgba(54, 162, 235, 0.2)',
           borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 1

@@ -53,6 +53,7 @@ const HacerEjercicio = () => {
   const [keyEvents, setKeyEvents] = useState([]);
   const [mistakes, setMistakes]=useState(0);  
   const [startTimer, setStartTimer] = useState(false);
+  const [alumnoStats, setAlumnoStats] = useState({});
   const totalTyped = useRef(0);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -64,6 +65,7 @@ const HacerEjercicio = () => {
     return false;
   };
 
+  
   useEffect(() => {
     const keydownHandler = ({ key, code }) => {
       if (isKeyboardCodeAllowed(key)) {
@@ -114,11 +116,66 @@ const HacerEjercicio = () => {
 
   useEffect(() => {
     if (typed.length > 0 && typed.length === codigo2.length) {
-      const stats = keyEvents.map(event => ({
-        key: event.key,
-        time: event.time
-      }));
+      const stats = [];
+      const keyStats = {};
+  
+      for (let i = 1; i < keyEvents.length; i++) {
+        const event = keyEvents[i];
+        const lastEvent = keyEvents[i - 1];
+        const timeDifference = event.time - lastEvent.time;
+        const key = event.key;
+  
+        if (keyStats.hasOwnProperty(key)) {
+          keyStats[key].count++;
+          keyStats[key].total += timeDifference;
+        } else {
+          keyStats[key] = { count: 1, total: timeDifference };
+        }
+  
+        const statsIndex = stats.findIndex(stat => stat.key === key);
+  
+        if (statsIndex !== -1) {
+          stats[statsIndex] = {
+            ...stats[statsIndex],
+            occurrences: keyStats[key].count,
+            total:keyStats[key].total,
+            average:keyStats[key].total / keyStats[key].count,
+          };
+        } else {
+          stats.push({
+            key,
+            occurrences: keyStats[key].count,
+            total:keyStats[key].total,
+            average:keyStats[key].total / keyStats[key].count,
+          });
+        }        
+      }
+      console.log("alumnoStats", alumnoStats);
+      if (alumnoStats) {
+        const alumnoStatsObject = typeof alumnoStats === 'object' ? alumnoStats : JSON.parse(alumnoStats);
 
+        console.log("alumnoStatsObject", alumnoStatsObject);
+        for (let j = 0; j < alumnoStatsObject.length; j++) {
+        const primeraEntrada = alumnoStatsObject[j];
+        const clave = primeraEntrada.key;
+        console.log(clave);
+          const statIndex = stats.findIndex(stat => stat.key === clave);
+          
+          console.log("key", clave);
+          console.log("statIndex", statIndex);
+          if (statIndex !== -1) {
+            const { occurrences, total } = alumnoStatsObject[j];
+            stats[statIndex] = {
+              ...stats[statIndex],
+              occurrences: stats[statIndex].occurrences + occurrences,
+              total: stats[statIndex].total + total,
+              average: (stats[statIndex].total + total) / (stats[statIndex].occurrences + occurrences),
+            };
+            console.log("stats[statIndex]", stats[statIndex]);
+          }
+        }
+      }
+  
       const alumnoId = localStorage.getItem('alumnoData');
       console.log("alumnoData:", alumnoId);
       if (alumnoId) {
@@ -129,12 +186,34 @@ const HacerEjercicio = () => {
 
   useEffect(() => {
     getEjercicio();
+    getAlumnoStats();
   }, []);
+
+  const getAlumnoStats = async () => {
+    try {
+      const alumnoId = localStorage.getItem('alumnoData');
+      console.log("alumnoData:", alumnoId);
+      if (alumnoId) {
+        const alumnoData = JSON.parse(alumnoId);
+        const { id } = alumnoData;
+        const response = await axios.get(`${endpoint}/alumnosShow/${id}`);
+        const statsData = response.data.stats;
+        if (statsData !== null) {
+          setAlumnoStats(statsData);
+        } else {
+          setAlumnoStats({});
+        }
+      }
+    } catch (error) {
+      console.error("Error al obtener stats del alumno:", error);
+    }
+  };
 
   const updateAlumnoStats = async (alumnoId, stats) => {
     try {
       const alumnoData = JSON.parse(alumnoId);
       const { id } = alumnoData;
+      console.log("stats", stats);
       await axios.put(`${endpoint}/alumnosStats/${id}`, {
       stats: JSON.stringify(stats)
       });
