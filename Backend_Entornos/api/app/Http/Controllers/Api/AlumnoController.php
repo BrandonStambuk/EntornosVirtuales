@@ -32,6 +32,7 @@ class AlumnoController extends Controller
         $alumno->email = $request->email;
         $alumno->password = $request->password;
         $alumno->stats = $request->stats;
+        $alumno->errors = $request->errors;
         $alumno->save();
     }
 
@@ -81,6 +82,15 @@ class AlumnoController extends Controller
     {
         $alumno = Alumno::findOrFail($request->id);
         $alumno->stats = $request->stats;
+        $alumno->errors = $request->errors;
+        $alumno->save();
+        return $alumno;
+    }
+
+    public function updateErrors(Request $request, $id)
+    {
+        $alumno = Alumno::findOrFail($request->id);
+        $alumno->errors = $request->errors;
         $alumno->save();
         return $alumno;
     }

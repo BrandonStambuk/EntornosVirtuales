@@ -86,6 +86,7 @@ const HacerEjercicio = () => {
       }
 
       if (mistake) {
+        
         return;
       }
       const event = {
@@ -175,11 +176,19 @@ const HacerEjercicio = () => {
           }
         }
       }
-  
+      const statsError=[];
+      statsError.push({
+        errors:mistakes,
+        totalTyped:totalTyped.current,
+        accuracy:((totalTyped.current-mistakes)/totalTyped.current)*100,
+      });
+      console.log("statsError", statsError);
+      console.log("stats", stats);
+
       const alumnoId = localStorage.getItem('alumnoData');
       console.log("alumnoData:", alumnoId);
       if (alumnoId) {
-        updateAlumnoStats(alumnoId, stats);
+        updateAlumnoStats(alumnoId, stats,statsError);
       }
     }
   }, [typed, codigo2, keyEvents]);
@@ -209,13 +218,14 @@ const HacerEjercicio = () => {
     }
   };
 
-  const updateAlumnoStats = async (alumnoId, stats) => {
+  const updateAlumnoStats = async (alumnoId, stats,statsError) => {
     try {
       const alumnoData = JSON.parse(alumnoId);
       const { id } = alumnoData;
       console.log("stats", stats);
       await axios.put(`${endpoint}/alumnosStats/${id}`, {
-      stats: JSON.stringify(stats)
+      stats: JSON.stringify(stats),
+      errors: JSON.stringify(statsError)
       });
       navigate('/mostrar');
     } catch (error) {
