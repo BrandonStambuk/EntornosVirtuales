@@ -7,14 +7,75 @@
     text-align: center;
   }
   
-  .content-wrapper {
-    margin-bottom: 1.5rem;
-  }
-  
+
   .title {
-    font-size: 2.25rem;
+    font-size: 3.25rem;
     font-weight: bold;
     letter-spacing: -0.025em;
+    font-family: monospace;
+    border-right: 5px solid;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 2s steps(38),
+    cursor .4s step-end infinite alternate;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+  }
+
+  .homepage-container .wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url(wave.png);
+    background-size: 1000px 100px;
+    animation: animate 30s linear infinite; /* Aquí aplicamos la animación directamente */
+    opacity: 1;
+    animation-delay: 0s;
+    z-index: 1000;
+  }
+  
+  @keyframes animate {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: 1000px;
+    }
+  }
+
+
+  .homepage-container .wave2 {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url(wave.png);
+    background-size: 1000px 100px;
+    animation: animate2 15s linear infinite; /* Aquí aplicamos la animación directamente */
+    opacity: 0.5;
+    animation-delay: 0s;
+    z-index: 999;
+  }
+
+  @keyframes animate2 {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: -1000px;
+    }
+  }
+
+  @keyframes cursor {
+      50%{ border-color: transparent}    
+  }
+
+  @keyframes typing {
+    from {width: 0}
   }
   
   .start-button {
