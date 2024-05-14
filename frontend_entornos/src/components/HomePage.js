@@ -12,7 +12,7 @@ const Homepage = () => {
           <div className="wave wave3"></div>
           <div className="wave wave4"></div>
         </section>
-        <a href="/mostrar" className="start-button">Start</a>
+        <a href="/inicio-sesion" className="start-button">Start</a>
       </div>
     </div>
   );

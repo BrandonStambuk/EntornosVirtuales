@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import { URL_API } from "./const";
+import { useNavigate, useParams } from 'react-router-dom';
 
 const endpoint = URL_API;
 
 const InicioSesion = () => {  
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleEmailChange = (email) => {
         setEmail(email.target.value);
@@ -23,8 +25,12 @@ const InicioSesion = () => {
                 email: email,
                 password: password
             });
-            localStorage.setItem("alumnoData", JSON.stringify(response.data));
-            console.log("Respuesta del servidor:", response.data);
+            if (response.data){
+                localStorage.setItem("alumnoData", JSON.stringify(response.data));
+                console.log("Respuesta del servidor:", response.data);
+                navigate("/mostrar");
+            }
+            
         } catch (error) {
             console.error("Error al buscar alumno:", error);
         }
@@ -32,7 +38,7 @@ const InicioSesion = () => {
 
     return (
         <div className="container d-flex justify-content-center align-items-center vh-100">
-            <div className="card" style={{ width: '80%', maxWidth: '800px', height: '80%', maxHeight: '600px' }}>
+            <div className="card" >
                 <div className="card-body">
                     <h1 className="card-title text-center">Inicio Sesion</h1>
                     <form>
