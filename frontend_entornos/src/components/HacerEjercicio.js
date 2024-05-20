@@ -54,6 +54,7 @@ const HacerEjercicio = () => {
   const [mistakes, setMistakes]=useState(0);  
   const [startTimer, setStartTimer] = useState(false);
   const [alumnoStats, setAlumnoStats] = useState({});
+  const [statsAlumnoError, setStatsAlumnoError] = useState({});
   const totalTyped = useRef(0);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -180,8 +181,12 @@ const HacerEjercicio = () => {
       statsError.push({
         errors:mistakes,
         totalTyped:totalTyped.current,
-        accuracy:((totalTyped.current-mistakes)/totalTyped.current)*100,
+        accuracy:((totalTyped.current-mistakes)/totalTyped.current)*100
       });
+      if(statsAlumnoError){
+        const statsErrorObject = typeof statsAlumnoError === 'object' ? statsAlumnoError : JSON.parse(statsAlumnoError);
+        console.log("statsErrorObject", statsErrorObject);
+      };
       console.log("statsError", statsError);
       console.log("stats", stats);
 
@@ -207,11 +212,17 @@ const HacerEjercicio = () => {
         const { id } = alumnoData;
         const response = await axios.get(`${endpoint}/alumnosShow/${id}`);
         const statsData = response.data.stats;
+        const errorsData = response.data.errors;
         if (statsData !== null) {
           setAlumnoStats(statsData);
         } else {
           setAlumnoStats({});
         }
+        if (errorsData !== null) {
+          setStatsAlumnoError(errorsData);
+        } else {
+          setStatsAlumnoError({});
+        }        
       }
     } catch (error) {
       console.error("Error al obtener stats del alumno:", error);
