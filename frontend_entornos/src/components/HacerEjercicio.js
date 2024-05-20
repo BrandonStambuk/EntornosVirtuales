@@ -186,6 +186,12 @@ const HacerEjercicio = () => {
       if(statsAlumnoError){
         const statsErrorObject = typeof statsAlumnoError === 'object' ? statsAlumnoError : JSON.parse(statsAlumnoError);
         console.log("statsErrorObject", statsErrorObject);
+        const entrada = statsErrorObject[0];
+        statsError[0]={
+          errors:statsError[0].errors+entrada.errors,
+          totalTyped:statsError[0].totalTyped+entrada.totalTyped,
+          accuracy:((statsError[0].totalTyped-entrada.errors)/statsError[0].totalTyped)*100
+        }
       };
       console.log("statsError", statsError);
       console.log("stats", stats);
