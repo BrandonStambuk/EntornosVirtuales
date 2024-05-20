@@ -26,7 +26,8 @@ const MostrarEjercicios = () => {
                     <tr>
                         <th>Nombre</th>
                         <th>Tipo de lenguaje</th>
-                        <th>Acciones</th>
+                        <th>Ejercicio Regular</th>
+                        <th>Ejercicio No BackSpace</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,9 @@ const MostrarEjercicios = () => {
                             <td>{ejercicio.tipo}</td>
                             <td>
                                 <Link to={`/mostrar/${ejercicio.id}`} className='btn btn-info me-2'><BsPencil /></Link>
+                            </td>
+                            <td>
+                                <Link to={`/mostrar-NoBackspace/${ejercicio.id}`} className='btn btn-info me-2'><BsPencil /></Link>
                             </td>
                         </tr>
                     ))}
