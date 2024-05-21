@@ -182,7 +182,8 @@ const HacerEjercicio = () => {
       statsError.push({
         errors:mistakes,
         totalTyped:totalTyped.current,
-        accuracy:((totalTyped.current-mistakes)/totalTyped.current)*100
+        accuracy:((totalTyped.current-mistakes)/totalTyped.current)*100,
+        totalTime: keyEvents[keyEvents.length - 1].time - keyEvents[0].time,
       });
       if(statsAlumnoError[0]){
         const statsErrorObject = typeof statsAlumnoError === 'object' ? statsAlumnoError : JSON.parse(statsAlumnoError);
@@ -191,7 +192,8 @@ const HacerEjercicio = () => {
         statsError[0]={
           errors:statsError[0].errors+entrada.errors,
           totalTyped:statsError[0].totalTyped+entrada.totalTyped,
-          accuracy:((statsError[0].totalTyped-entrada.errors)/statsError[0].totalTyped)*100
+          accuracy:((statsError[0].totalTyped-entrada.errors)/statsError[0].totalTyped)*100,
+          totalTime:statsError[0].totalTime+entrada.totalTime,
         }
       };
       console.log("statsError", statsError);

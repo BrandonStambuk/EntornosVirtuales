@@ -165,6 +165,7 @@ const HacerEjercicioNoBackSpace = () => {
         errors: mistakes,
         totalTyped: totalTyped.current,
         accuracy: ((totalTyped.current - mistakes) / totalTyped.current) * 100,
+        totalTime: keyEvents[keyEvents.length - 1].time - keyEvents[0].time,
       });
       if (statsAlumnoError[0]) {
         const statsErrorObject = typeof statsAlumnoError === 'object' ? statsAlumnoError : JSON.parse(statsAlumnoError);
@@ -173,6 +174,7 @@ const HacerEjercicioNoBackSpace = () => {
           errors: statsError[0].errors + entrada.errors,
           totalTyped: statsError[0].totalTyped + entrada.totalTyped,
           accuracy: ((statsError[0].totalTyped - entrada.errors) / statsError[0].totalTyped) * 100,
+          totalTime: statsError[0].totalTime + entrada.totalTime,
         };
       }
       const alumnoId = localStorage.getItem('alumnoData');

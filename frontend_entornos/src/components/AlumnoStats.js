@@ -11,6 +11,8 @@ const AlumnoStats = () => {
   const [donutChart, setDonutChart] = useState(null);
   const [barChartNoBackSpace, setBarChartNoBackSpace] = useState(null);
   const [donutChartNoBackSpace, setDonutChartNoBackSpace] = useState(null);
+  const [cpm, setCpm] = useState(0);
+  const [cpmNoBackSpace, setCpmNoBackSpace] = useState(0);
 
   useEffect(() => {
     getStats();
@@ -28,9 +30,30 @@ const AlumnoStats = () => {
       drawDonutChart(errors);
       drawChartsNoBackSpace(statsNoBackSpace);
       drawDonutChartNoBackSpace(errorsNoBackSpace);
+      calculateCpm(errors);
+      calculateCpmNobackSpace(errorsNoBackSpace);
     } catch (error) {
       console.error("Error al obtener estadísticas del alumno:", error);
     }
+  };
+
+  const calculateCpm = (data) =>{
+    const errorDataObject = JSON.parse(data);
+    const errorDataArray = Object.values(errorDataObject);
+    const totalTyped = errorDataArray[0].totalTyped;
+    const time = errorDataArray[0].totalTime;
+    const timeInMinutes = time / 60000;
+    const cpm = totalTyped / timeInMinutes;
+    setCpm(cpm);
+  };
+  const calculateCpmNobackSpace = (data) =>{
+    const errorDataObject = JSON.parse(data);
+    const errorDataArray = Object.values(errorDataObject);
+    const totalTyped = errorDataArray[0].totalTyped;
+    const time = errorDataArray[0].totalTime;
+    const timeInMinutes = time / 60000;
+    const cpm = totalTyped / timeInMinutes;
+    setCpmNoBackSpace(cpm);
   };
 
   const drawCharts = (stats) => {
@@ -196,6 +219,7 @@ const AlumnoStats = () => {
           <div className="card mb-4">
             <div className="card-body">
               <h5 className="card-title">Estadísticas del alumno</h5>
+              <p>CPM: {cpm.toFixed(2)}</p>
               <canvas id="barChart"></canvas>
             </div>
             <div className="card-body">
@@ -208,6 +232,7 @@ const AlumnoStats = () => {
           <div className="card mb-4">
             <div className="card-body">
               <h5 className="card-title">Estadísticas del alumno sin Backspace</h5>
+              <p>CPM: {cpmNoBackSpace.toFixed(2)}</p>
               <canvas id="barChartNoBackSpace"></canvas>
             </div>
             <div className="card-body">
