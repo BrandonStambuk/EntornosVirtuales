@@ -80,6 +80,7 @@ const HacerEjercicio = () => {
         setTyped((prev) => prev.slice(0, -1));
         setCursor((cursor) => cursor - 1);
         totalTyped.current -= 1;
+        totalMistakes = mistakes;
         totalMistakes += 1;
         setMistakes(totalMistakes);
         setKeyEvents((prevEvents) => prevEvents.slice(0, -1));
@@ -183,7 +184,7 @@ const HacerEjercicio = () => {
         totalTyped:totalTyped.current,
         accuracy:((totalTyped.current-mistakes)/totalTyped.current)*100
       });
-      if(statsAlumnoError){
+      if(statsAlumnoError[0]){
         const statsErrorObject = typeof statsAlumnoError === 'object' ? statsAlumnoError : JSON.parse(statsAlumnoError);
         console.log("statsErrorObject", statsErrorObject);
         const entrada = statsErrorObject[0];

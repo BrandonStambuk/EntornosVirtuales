@@ -87,6 +87,15 @@ class AlumnoController extends Controller
         return $alumno;
     }
 
+    public function updateStatsNoBackSpace(Request $request, $id)
+    {
+        $alumno = Alumno::findOrFail($request->id);
+        $alumno->statsNoBackSpace = $request->statsNoBackSpace;
+        $alumno->errorsNoBackSpace = $request->errorsNoBackSpace;
+        $alumno->save();
+        return $alumno;
+    }
+
     public function updateErrors(Request $request, $id)
     {
         $alumno = Alumno::findOrFail($request->id);

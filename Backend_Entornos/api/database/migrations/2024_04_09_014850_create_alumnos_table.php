@@ -21,6 +21,8 @@ class CreateAlumnosTable extends Migration
             $table->string('password');
             $table->json('stats')->nullable();
             $table->json('errors')->nullable();
+            $table->json('statsNoBackSpace')->nullable();
+            $table->json('errorsNoBackSpace')->nullable();
             $table->timestamps();
         });
     }

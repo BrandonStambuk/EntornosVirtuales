@@ -30,6 +30,7 @@ Route::controller(EjercicioController::class)->group(function (){
     Route::post('/registrarAlumno', 'store');
     Route::post('/alumnos/find', 'find');
     Route::put('/alumnosStats/{id}', 'updateStats');
+    Route::put('/alumnosStatsNoBackSpace/{id}', 'updateStatsNoBackSpace');
     //Route::put('/alumnosErrors/{id}', 'updateErrors');
     Route::get('/alumnosShow/{id}', 'show');
 
