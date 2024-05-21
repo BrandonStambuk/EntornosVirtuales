@@ -75,7 +75,7 @@ const HacerEjercicioNoBackSpace = () => {
 
       const event = {
         key,
-        time: new Date().getTime(),
+        time: new Date().getTime(),        
       };
 
       setKeyEvents((prevEvents) => [...prevEvents, event]);
