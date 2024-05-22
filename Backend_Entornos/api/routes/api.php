@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\EjercicioController;
 use App\Http\Controllers\Api\AlumnoController;
+use App\Http\Controllers\Api\ProfesorController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,5 +34,8 @@ Route::controller(EjercicioController::class)->group(function (){
     Route::put('/alumnosStatsNoBackSpace/{id}', 'updateStatsNoBackSpace');
     //Route::put('/alumnosErrors/{id}', 'updateErrors');
     Route::get('/alumnosShow/{id}', 'show');
+  });
 
+  Route::controller(ProfesorController::class)->group(function (){
+    Route::post('/profesor/find', 'find');
   });

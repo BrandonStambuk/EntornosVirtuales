@@ -19,21 +19,40 @@ const InicioSesion = () => {
 
     const handleFindAlumno = async (e) => {
         e.preventDefault();
-
+        const is_alumno = true;
         try {
-            const response = await axios.post(`${endpoint}/alumnos/find`, {
+            const response = await axios.post(`${endpoint}/profesor/find`, {
                 email: email,
                 password: password
             });
             if (response.data){
-                localStorage.setItem("alumnoData", JSON.stringify(response.data));
-                console.log("Respuesta del servidor:", response.data);
+                localStorage.setItem("profesorData", JSON.stringify(response.data),{is_profesor: true});
+                is_alumno=false;
+                console.log("Respuesta del servidor:", response.data, {is_profesor: true});
                 navigate("/mostrar");
             }
             
         } catch (error) {
-            console.error("Error al buscar alumno:", error);
+            console.error("Error al buscar profesor:", error);
         }
+        if (is_alumno){
+            try {
+                const responseAlumno = await axios.post(`${endpoint}/alumnos/find`, {
+                    email: email,
+                    password: password
+                });
+                if (responseAlumno.data){
+                    localStorage.setItem("alumnoData", JSON.stringify(responseAlumno.data),{is_profesor: false});
+                    console.log("Respuesta del servidor:", responseAlumno.data, {is_profesor: false});
+                    navigate("/mostrar");
+                }
+                
+            } catch (error) {
+                console.error("Error al buscar alumno:", error);
+            }            
+        }
+
+                
     }
 
     return (
