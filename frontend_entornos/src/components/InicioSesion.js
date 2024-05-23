@@ -19,7 +19,7 @@ const InicioSesion = () => {
 
     const handleFindAlumno = async (e) => {
         e.preventDefault();
-        const is_alumno = true;
+        let is_alumno = true;
         try {
             const response = await axios.post(`${endpoint}/profesor/find`, {
                 email: email,
@@ -29,7 +29,7 @@ const InicioSesion = () => {
                 localStorage.setItem("profesorData", JSON.stringify(response.data),{is_profesor: true});
                 is_alumno=false;
                 console.log("Respuesta del servidor:", response.data, {is_profesor: true});
-                navigate("/mostrar");
+                navigate("/registrar-alumno");
             }
             
         } catch (error) {
