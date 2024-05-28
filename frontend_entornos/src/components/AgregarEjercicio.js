@@ -38,7 +38,7 @@ const AgregarEjercicio = () => {
                 confirmButtonText: 'OK'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '/mostrar';  // Cambia '/nueva-ruta' por la ruta deseada
+                    window.location.href = '/mostrarEjercicio'; 
                 }
             });
         }catch(error){

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const endpoint = "http://localhost:8000/api"; // Asegúrate de actualizar la URL base correcta.
-
+const endpoint = "http://localhost:8000/api";
 const InicioSesion = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +33,7 @@ const InicioSesion = () => {
         console.log("Respuesta del servidor:", response.data);
 
         
-          navigate("/registrar-alumno");
+          navigate("/agregar");
           window.location.reload();
       }
     } catch (error) {
