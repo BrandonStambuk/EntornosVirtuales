@@ -18,33 +18,37 @@ const MostrarEjercicios = () => {
     };
 
     return (
-        <div>
+        <div className='container mt-4'>
+            <h1 className='mb-4'>Tabla de Ejercicios</h1>
             <div className='d-grid gap-2 col-md-6'>
+                {/* Aquí podrías agregar un botón u otro contenido si es necesario */}
             </div>
-            <table className='table table-striped'>
-                <thead className='bg-primary text-white'>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Tipo de lenguaje</th>
-                        <th>Ejercicio Regular</th>
-                        <th>Ejercicio No BackSpace</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {ejercicios.map((ejercicio) => (
-                        <tr key={ejercicio.id}>
-                            <td>{ejercicio.nombre}</td>
-                            <td>{ejercicio.tipo}</td>
-                            <td>
-                                <Link to={`/mostrar/${ejercicio.id}`} className='btn btn-info me-2'><BsPencil /></Link>
-                            </td>
-                            <td>
-                                <Link to={`/mostrar-NoBackspace/${ejercicio.id}`} className='btn btn-info me-2'><BsPencil /></Link>
-                            </td>
+            <div className='table-responsive shadow-sm p-3 mb-5 bg-white rounded'>
+                <table className='table table-striped'>
+                    <thead className='bg-primary text-white'>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tipo de lenguaje</th>
+                            <th>Ejercicio Regular</th>
+                            <th>Ejercicio No BackSpace</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {ejercicios.map((ejercicio) => (
+                            <tr key={ejercicio.id}>
+                                <td>{ejercicio.nombre}</td>
+                                <td>{ejercicio.tipo}</td>
+                                <td>
+                                    <Link to={`/mostrar/${ejercicio.id}`} className='btn  me-2'><BsPencil /></Link>
+                                </td>
+                                <td>
+                                    <Link to={`/mostrar-NoBackspace/${ejercicio.id}`} className='btn me-2'><BsPencil /></Link>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };
