@@ -63,6 +63,22 @@ class EjercicioController extends Controller
         //
     }
 
+    public function updatePublicoDocente(Request $request, $id)
+    {
+        $ejercicio = Ejercicio::findOrFail($request->id);
+        $ejercicio->publicado = $request->publicado;
+        $ejercicio->save();
+        return $ejercicio;
+    }
+
+    public function updateStatsDocente(Request $request, $id)
+    {
+        $ejercicio = Ejercicio::findOrFail($request->id);
+        $ejercicio->statsDocente = $request->statsDocente;
+        $ejercicio->save();
+        return $ejercicio;
+    }
+
     /**
      * Remove the specified resource from storage.
      *
