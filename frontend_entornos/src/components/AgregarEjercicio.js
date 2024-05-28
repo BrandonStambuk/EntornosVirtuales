@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from 'axios'
 import { URL_API } from "./const";
-
+import Swal from 'sweetalert2'; 
 const endpoint = URL_API;
 
 const AgregarEjercicio = () => {
@@ -23,11 +23,28 @@ const AgregarEjercicio = () => {
 
     const handleStoreEjercicio = async (e) => {
         e.preventDefault();
-        await axios.post(`${endpoint}/crearEjercicio`, {
-            nombre: nombre,
-            tipo: tipo,
-            codigo: codigo          
-        });
+
+
+        try{
+            await axios.post(`${endpoint}/crearEjercicio`, {
+                nombre: nombre,
+                tipo: tipo,
+                codigo: codigo          
+            });
+            Swal.fire({
+                title: 'Registro Exitoso',
+                text: 'Se agrego el ejercicio correctamente',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/mostrar';  // Cambia '/nueva-ruta' por la ruta deseada
+                }
+            });
+        }catch(error){
+
+        }
+        
     }
 
 
