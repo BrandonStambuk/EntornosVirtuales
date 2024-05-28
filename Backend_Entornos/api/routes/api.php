@@ -25,6 +25,8 @@ Route::controller(EjercicioController::class)->group(function (){
     Route::get('/ejercicios', 'index');    
     Route::post('/crearEjercicio', 'store');
     Route::get('/ejercicio-aleatorio','indexRandom');
+    Route::put('/ejercicioStatsDocente/{id}', 'updateStatsDocente');
+    Route::put('/ejercicioPublicarDocente/{id}', 'updatePublicoDocente');    
   });
 
   Route::controller(AlumnoController::class)->group(function (){  

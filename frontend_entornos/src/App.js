@@ -11,6 +11,8 @@ import RegistrarAlumno from './components/RegistroAlumno';
 import InicioSesion from './components/InicioSesion';
 import AlumnoStats from './components/AlumnoStats';
 import HacerEjercicioNoBackSpace from './components/HacerEjercicioNoBackSpace';
+import MostrarEjerciciosProfesor from './components/MostrarEjerciciosProfesor';
+import HacerEjerciciosProfesor from './components/HacerEjercicioProfesor';
 
 const App = () => {
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
@@ -60,6 +62,8 @@ const App = () => {
           <Route path='/registrar-alumno' element={<ProfesorProtectedRoute><RegistrarAlumno /></ProfesorProtectedRoute>} />
           <Route path='/inicio-sesion' element={<InicioSesion />} />
           <Route path='/stats' element={<AlumnoStats />} />
+          <Route path='/mostrarEjercicio' element={<MostrarEjerciciosProfesor />} />
+          <Route path='/mostrarEjercicio/:id' element={<HacerEjerciciosProfesor />} />
         </Routes>
       </BrowserRouter>
     </div>

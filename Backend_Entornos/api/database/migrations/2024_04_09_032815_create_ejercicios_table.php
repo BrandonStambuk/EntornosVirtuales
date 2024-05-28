@@ -18,6 +18,8 @@ class CreateEjerciciosTable extends Migration
             $table->string('nombre');
             $table->string('tipo');
             $table->text('codigo');
+            $table->boolean('publicado')->default(false);
+            $table->json('statsDocente')->nullable();
             $table->timestamps();
         });
     }
