@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\EjercicioController;
 use App\Http\Controllers\Api\AlumnoController;
 use App\Http\Controllers\Api\ProfesorController;
+use App\Http\Controllers\LTIController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,6 +20,8 @@ use App\Http\Controllers\Api\ProfesorController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/lti-launch', [LTIController::class, 'launch']);
 
 Route::controller(EjercicioController::class)->group(function (){
     Route::get('/ejercicios/{id}', 'show');

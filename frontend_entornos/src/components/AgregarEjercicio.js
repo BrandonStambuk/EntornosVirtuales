@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from 'axios'
 import { URL_API } from "./const";
+import apiClient from '../config/axiosConfig';
 import Swal from 'sweetalert2'; 
 const endpoint = URL_API;
 
@@ -26,7 +27,7 @@ const AgregarEjercicio = () => {
 
 
         try{
-            await axios.post(`${endpoint}/crearEjercicio`, {
+            await apiClient.post('/crearEjercicio', {
                 nombre: nombre,
                 tipo: tipo,
                 codigo: codigo          
@@ -46,7 +47,6 @@ const AgregarEjercicio = () => {
         }
         
     }
-
 
     return (
         <div>
